@@ -1,3 +1,5 @@
+
+//using a get method to grab the data from the previous workout
 const API = {
   async getLastWorkout() {
     let res;
@@ -10,6 +12,8 @@ const API = {
 
     return json[json.length - 1];
   },
+
+  //using a put method to post the data from the added excercise
   async addExercise(data) {
     const id = location.search.split("=")[1];
 
@@ -23,6 +27,8 @@ const API = {
 
     return json;
   },
+
+  //posting the data from a created workout 
   async createWorkout(data = {}) {
     const res = await fetch("/api/workouts", {
       method: "POST",
