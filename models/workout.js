@@ -30,6 +30,7 @@ const workoutSchema = new Schema(
           required: true,
           validate : {
             validator : Number.isInteger}
+            //attempt at making negitive numbers not an option 
         },
         reps: {
           type: Number,
