@@ -26,16 +26,28 @@ const workoutSchema = new Schema(
           required: "Please enter how many minutes you worked out today"
         },
         weight: {
-          type: Number
+          type: Number,
+          required: true,
+          validate : {
+            validator : Number.isInteger}
         },
         reps: {
-          type: Number
+          type: Number,
+          required: true,
+          validate : {
+            validator : Number.isInteger}
         },
         sets: {
-          type: Number
+          type: Number,
+          required: true,
+          validate : {
+            validator : Number.isInteger}
         },
         distance: {
-          type: Number
+          type: Number,
+          required: true,
+          validate : {
+            validator : Number.isInteger}
         }
       }
     ]
