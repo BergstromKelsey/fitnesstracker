@@ -1,65 +1,65 @@
-var db =require("../models");
-module.exports = function (app){
+var db = require("../models");
 
-app.get("/api/workouts",(req,res)=> {
+module.exports = function(app) {
 
-db.workout.find({})
-.then(workout => {
-    res.json(workout);
-})
-.catch(err =>{
-    res.json(err);
+    //finds previous workouts
+    app.get("/api/workouts", (req, res) => {
+        db.Workout.find({})
+        .then(workout => {
+            res.json(workout);
+        })
+        .catch(err => {
+            res.json(err);
+        });
     });
-});
-
-app.post("/api/workouts", async(req,res)=> {
-try{ 
-    const response= await db.workout.create({type:"workouts"})
-    res.json(response);
-}
-catch(err){
-     console.log("error")
-    }
-           
-    });
-
-
-
-app.put("/api/workouts/:id",({body,params}, res) =>{
-    const workoutID = params.id;
-    let savedExercise = [];
-    db.Workout.find({_id: workoutID})
-    .then(dbWorkout => {
     
-        savedExercise = dbworkout[0].exercises;
-        res.json(dbworkout[0].exercises);
-        let allExercises = [...savedExercise, body]
-        console.log(allExercises)
-        updateWorkout(allExercises)
+    // Creates a new workout in the database
+    app.post("/api/workouts", async (req, res)=> {
+        try{
+            const response = await db.Workout.create({type: "workout"})
+            res.json(response);
+        }
+        catch(err){
+            console.log("error occurred creating a workout: ", err)
+        }
     })
 
+    app.put("/api/workouts/:id", ({body, params}, res) => {
+        const workoutId = params.id;
+        let savedExercises = [];
 
-    .catch (err => {
-        res.json(err);
+        // gets all the saved exercises 
+        db.Workout.find({_id: workoutId})
+            .then(dbWorkout => {
+                // console.log(dbWorkout)
+                savedExercises = dbWorkout[0].exercises;
+                res.json(dbWorkout[0].exercises);
+                let allExercises = [...savedExercises, body]
+                console.log(allExercises)
+                updateWorkout(allExercises)
+            })
+            .catch(err => {
+                res.json(err);
+            });
 
-    });
-    
-
-    function updateWorkout(exercises){
-        db.workout.findByIdAndUpdate(workoutId, {excersises:excercises},function(err,doc){
-            if (err){
+        function updateWorkout(exercises){
+            db.Workout.findByIdAndUpdate(workoutId, {exercises: exercises}, function(err, doc){
+            if(err){
                 console.log(err)
             }
-        })
-    }
-})
-app.get("/api/workouts/range", (req,res)=>{
 
-    db.workout.find({})
-    .then(workout => {
-        res.json(workout);
+            })
+        }
+            
     })
-    .catch(err =>{
-        res.json(err);
+
+    app.get("/api/workouts/range", (req, res) => {
+        db.Workout.find({})
+        .then(workout => {
+            res.json(workout);
+        })
+        .catch(err => {
+            res.json(err);
         });
-    });}
+    }); 
+};
