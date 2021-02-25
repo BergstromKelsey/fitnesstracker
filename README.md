@@ -8,6 +8,6 @@ To use this application, simply enter in a new or updatea current workout and hi
 
 -DEPLOYED: https://kelseysfitnesstracker.herokuapp.com/
 
-![alt text]()
-![alt text]()
-![alt text]()
+![alt text](public/trackerthree.png)
+![alt text](public/trackertwo.png)
+![alt text](public/trackerone.png)
