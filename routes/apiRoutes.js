@@ -24,6 +24,35 @@ catch(err){
     });
 
 
+
+app.put("/api/workouts/:id",({body,params}, res) =>{
+    const workoutID = params.id;
+    let savedExercise = [];
+    db.Workout.find({_id: workoutID})
+    .then(dbWorkout => {
+    
+        savedExercise = dbworkout[0].exercises;
+        res.json(dbworkout[0].exercises);
+        let allExercises = [...savedExercise, body]
+        console.log(allExercises)
+        updateWorkout(allExercises)
+    })
+
+
+    .catch (err => {
+        res.json(err);
+
+    });
+    
+
+    function updateWorkout(exercises){
+        db.workout.findByIdAndUpdate(workoutId, {excersises:excercises},function(err,doc){
+            if (err){
+                console.log(err)
+            }
+        })
+    }
+})
 app.get("/api/workouts/range", (req,res)=>{
 
     db.workout.find({})
@@ -33,7 +62,4 @@ app.get("/api/workouts/range", (req,res)=>{
     .catch(err =>{
         res.json(err);
         });
-    });
-
-
-}
+    });}

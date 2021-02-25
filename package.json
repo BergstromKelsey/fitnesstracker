@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongojs": "^3.1.0",
-    "mongoose": "^5.3.16",
+    "mongoose": "^5.11.18",
     "morgan": "^1.9.1"
   },
   "repository": {
@@ -25,5 +25,6 @@
   "bugs": {
     "url": "https://github.com/BergstromKelsey/fitnesstracker/issues"
   },
-  "homepage": "https://github.com/BergstromKelsey/fitnesstracker#readme"
+  "homepage": "https://github.com/BergstromKelsey/fitnesstracker#readme",
+  "devDependencies": {}
 }
